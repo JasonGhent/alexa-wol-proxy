@@ -1,0 +1,23 @@
+{
+  "name": "alexa-wol-proxy",
+  "version": "1.0.0",
+  "description": "A proxy from which to issue WOL commands on a network",
+  "main": "index.js",
+  "scripts": {
+    "start": "npm run build-image-and-run",
+    "build-image-and-run": "npm run regen-and-build && npm run image",
+    "regen-and-build": "npm run regen-dockerfile && npm run build-image",
+    "regen-dockerfile": "./opt/build.sh",
+    "build-image": "docker build -t $npm_package_name .",
+    "image": "source .env && docker run --net=host --rm -e MAC=$MAC $npm_package_name",
+    "cleanup": "rm $npm_package_name.tar; docker rm $(docker ps -a -q) 2&>/dev/null; docker rmi -f $(docker images -q) 2&>/dev/null; exit 0;",
+    "image-export": "npm run cleanup && npm run regen-and-build && docker save $npm_package_name > $npm_package_name.tar"
+  },
+  "license": "ISC",
+  "dependencies": {
+    "wol": "^1.0.3"
+  },
+  "devDependencies": {
+    "webpack": "^1.12.14"
+  }
+}
