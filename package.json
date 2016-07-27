@@ -9,7 +9,7 @@
     "regen-and-build": "npm run regen-dockerfile && npm run build-image",
     "regen-dockerfile": "./opt/build.sh",
     "build-image": "docker build -t $npm_package_name .",
-    "image": "bash -c \"source .env && docker run --restart=always --net=host -e MAC=$MAC -d $npm_package_name\"",
+    "image": ". ./.env && docker run --restart=always --net=host -e MAC=$MAC -d $npm_package_name",
     "cleanup": "rm $npm_package_name.tar; docker rm $(docker ps -a -q) 2&>/dev/null; docker rmi -f $(docker images -q) 2&>/dev/null; exit 0;",
     "image-export": "npm run cleanup && npm run regen-and-build && docker save $npm_package_name > $npm_package_name.tar"
   },
