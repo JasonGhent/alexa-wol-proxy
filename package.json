@@ -5,6 +5,8 @@
   "main": "index.js",
   "scripts": {
     "start": "npm run build-image-and-run",
+    "tail": "docker logs -f $(docker ps | grep $npm_package_name | awk '{print $1}' | head -n 1)",
+    "sample": "curl localhost:3488; npm run tail",
     "build-image-and-run": "npm run regen-and-build && npm run image",
     "regen-and-build": "npm run regen-dockerfile && npm run build-image",
     "regen-dockerfile": "./opt/build.sh",
