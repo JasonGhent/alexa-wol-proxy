@@ -3,3 +3,4 @@ out.js
 machine-wol-nas-client-optional.tar
 .env
 Dockerfile
+npm-debug.log

@@ -7,7 +7,9 @@ use is for an Echo app to WOL a Steam Machine via the voice command,
   "Echo tell 'App-Name-In-AWS-Lambda' 'on'".
 
 Setup:
-  `npm run regen-dockerfile` - Builds the Dockerfile with concatenated index.js
+  `npm run build-image-and-run` - Builds the Dockerfile with concatenated index.js
+				  and runs a container with automatic restarts
+				  across host system reboots
 
 Notes:
   This project concatenates the program source into the Dockerfile to bypass the
